@@ -1,0 +1,74 @@
+﻿@model IEnumerable<Editor.Models.Doc>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<style>
+    .card {
+        width: 150px;
+        height: 150px;
+        background-color: lightgray;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-size: 16px; 
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease-in-out;
+        margin: 10px; 
+        border-radius: 4px; 
+        position: relative; 
+    }
+
+        .card:hover {
+            transform: scale(1.05);
+            background-color: #f8f9fa;
+        }
+
+        .card a {
+            margin: 0;
+            text-decoration: none;
+            color: black; 
+            position: absolute; 
+            bottom: 10px; 
+            width: 100%; 
+            text-align: center; 
+        }
+
+    .icon {
+        font-size: 100px; 
+        
+    }
+
+    .card-title {
+        font-weight: bold;
+    }
+</style>
+
+
+<div class="container mt-2 pt-4">
+    <h2 class="text-center mb-4" style="font-weight: bold; color: #007bff;">Documents</h2>
+
+    <div class="row">
+        <!-- Placeholder for a new document -->
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
+            <div class="card">
+                <a asp-action="Create" class="icon">+</a>
+                <a asp-action="Create" class="card-title">Blank Doc</a>
+            </div>
+        </div>
+
+        <!-- Dynamically generated cards for each item -->
+        @foreach (var item in Model)
+        {
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
+                <div class="card" style="background-color: lightblue;">
+                    <!-- Adjust the href below to point to your document icons -->
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="icon">📃</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="card-title" style="font-size: 10px">@item.Title</a>
+                </div>
+            </div>
+        }
+    </div>
+</div>
